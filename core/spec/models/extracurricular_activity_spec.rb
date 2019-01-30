@@ -1,7 +1,6 @@
 require 'spec_helper_models'
 
 describe Gaku::ExtracurricularActivity, type: :model do
-
   describe 'concerns' do
     it_behaves_like 'enrollable'
   end
@@ -10,21 +9,20 @@ describe Gaku::ExtracurricularActivity, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of :name }
-    it { should validate_uniqueness_of :name }
+    it { is_expected.to validate_presence_of :name }
+    it { is_expected.to validate_uniqueness_of :name }
   end
 
   describe '#to_s' do
     let(:extracurricular_activity) { build(:extracurricular_activity) }
+
     specify { extracurricular_activity.to_s.should eq extracurricular_activity.name }
   end
 
   context 'counter_cache' do
-
     let!(:extracurricular_activity) { create(:extracurricular_activity) }
 
     context 'enrollments_count' do
-
       let(:student) { build(:student) }
       let(:extracurricular_activity_with_enrollment) { create(:extracurricular_activity, :with_enrollment) }
 
@@ -41,5 +39,4 @@ describe Gaku::ExtracurricularActivity, type: :model do
       end
     end
   end
-
 end

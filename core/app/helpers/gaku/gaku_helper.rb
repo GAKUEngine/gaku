@@ -1,20 +1,18 @@
 module Gaku
   module GakuHelper
-
     include SortHelper
     include TranslationsHelper
     include FlashHelper
 
     def broadcast(channel, &block)
-      message = {:channel => channel, :data => capture(&block)}
-      uri = URI.parse("http://localhost:9292/faye")
-      Net::HTTP.post_form(uri, :message => message.to_json)
+      message = { channel: channel, data: capture(&block) }
+      uri = URI.parse('http://localhost:9292/faye')
+      Net::HTTP.post_form(uri, message: message.to_json)
     end
 
-
-    def tr_for(resource, &block)
+    def tr_for(resource)
       content_tag :tr, id: "#{resource.class.to_s.demodulize.underscore.dasherize}-#{resource.id}" do
-        block.call
+        yield
       end
     end
 
@@ -41,7 +39,7 @@ module Gaku
     end
 
     def cannot_edit?
-      ! can_edit?
+      !can_edit?
     end
 
     def genders
@@ -57,10 +55,10 @@ module Gaku
     end
 
     def render_js_partial(partial, locals = {})
-      unless locals == {}
-        escape_javascript(render partial: partial, formats: [:html], handlers: [:erb, :slim], locals: locals)
+      if locals == {}
+        escape_javascript(render(partial: partial, formats: [:html], handlers: %i[erb slim]))
       else
-        escape_javascript(render partial: partial, formats: [:html], handlers: [:erb, :slim])
+        escape_javascript(render(partial: partial, formats: [:html], handlers: %i[erb slim], locals: locals))
       end
     end
 
@@ -74,12 +72,10 @@ module Gaku
       content_tag :div, nil, style: "width:100px;height:20px;background-color:#{color}"
     end
 
-
-
-    def comma_separated_list(objects, &block)
+    def comma_separated_list(objects)
       if objects.any?
         objects.map do |object|
-          block_given? ? block.call(object) : object
+          block_given? ? yield(object) : object
         end.join(', ').html_safe
       else
         t(:empty)
@@ -88,11 +84,12 @@ module Gaku
 
     def prepare_target(nested_resource, address)
       return nil if nested_resource.blank?
+
       [nested_resource, address].flatten
     end
 
     def prepare_resource_name(nested_resources, resource)
-      @resource_name = [nested_resources.map {|r| r.is_a?(Symbol) ? r.to_s : get_class(r) }, resource.to_s].flatten.join '-'
+      @resource_name = [nested_resources.map { |r| r.is_a?(Symbol) ? r.to_s : get_class(r) }, resource.to_s].flatten.join '-'
     end
 
     def exam_completion_info(exam)
@@ -106,7 +103,7 @@ module Gaku
     end
 
     def datepicker_date_format(date)
-      date ?  date.strftime('%Y-%m-%d') : Time.now.strftime('%Y-%m-%d')
+      date ? date.strftime('%Y-%m-%d') : Time.now.strftime('%Y-%m-%d')
     end
 
     def extract_grouped(grouped, resource)
@@ -128,7 +125,7 @@ module Gaku
     def link_to_download(resource, options = {})
       name = content_tag(:span, nil, class: 'glyphicon glyphicon-download')
       attributes = {
-        class: "btn btn-xs btn-success download-link"
+        class: 'btn btn-xs btn-success download-link'
       }.merge(options)
       link_to name, resource, attributes
     end
@@ -137,19 +134,17 @@ module Gaku
       name = content_tag(:span, nil, class: 'glyphicon glyphicon-repeat')
       attributes = {
         remote: true,
-        class: "btn btn-xs btn-success recovery-link"
+        class: 'btn btn-xs btn-success recovery-link'
       }.merge(options)
       link_to name, resource, attributes
     end
 
     def icon(name)
-      content_tag(:span, nil, class: "#{name}")
+      content_tag(:span, nil, class: name.to_s)
     end
 
     def icon_label(icon_name, label)
-      raw %{ #{icon(icon_name)} #{label} }
+      raw %( #{icon(icon_name)} #{label} )
     end
-
   end
 end
-

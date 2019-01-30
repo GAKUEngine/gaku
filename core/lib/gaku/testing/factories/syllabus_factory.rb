@@ -1,13 +1,12 @@
 FactoryBot.define do
-
   factory :syllabus, class: Gaku::Syllabus do
     name { FFaker::Name.name }
-    code '12345'
-    description 'Short description'
-    credits 'Huge Credits'
+    code { '12345' }
+    description { 'Short description' }
+    credits { 'Huge Credits' }
 
     factory :invalid_syllabus do
-      code nil
+      code { nil }
     end
   end
 
@@ -16,5 +15,4 @@ FactoryBot.define do
       syllabus.exams << create(:exam)
     end
   end
-
 end

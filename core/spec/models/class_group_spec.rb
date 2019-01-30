@@ -1,7 +1,6 @@
 require 'spec_helper_models'
 
 describe Gaku::ClassGroup, type: :model do
-
   describe 'concerns' do
     it_behaves_like 'notable'
     it_behaves_like 'enrollable'
@@ -10,11 +9,12 @@ describe Gaku::ClassGroup, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of :name }
+    it { is_expected.to validate_presence_of :name }
   end
 
   describe '#to_s' do
     let(:class_group) { build(:class_group) }
+
     specify { class_group.to_s.should eq "#{class_group.grade} - #{class_group.name}" }
   end
 
@@ -35,7 +35,6 @@ describe Gaku::ClassGroup, type: :model do
   end
 
   it 'exclude from .upcomming if have active and not started semester' do
-
     class_group = create(:class_group)
 
     upcomming_semester = create(:upcomming_semester)
@@ -44,15 +43,13 @@ describe Gaku::ClassGroup, type: :model do
     active_semester = create(:active_semester)
     create(:semester_connector_class_group, semester: active_semester, semesterable: class_group)
 
-    expect(described_class.upcomming).to_not eq [class_group]
+    expect(described_class.upcomming).not_to eq [class_group]
   end
 
   context 'counter_cache' do
-
     let!(:class_group) { create(:class_group) }
 
     context 'notes_count' do
-
       let(:note) { build(:note) }
       let(:class_group_with_note) { create(:class_group, :with_note) }
 
@@ -70,7 +67,6 @@ describe Gaku::ClassGroup, type: :model do
     end
 
     context 'enrollments_count' do
-
       let(:student) { build(:student) }
       let(:class_group_with_enrollment) { create(:class_group, :with_enrollment) }
 
@@ -87,5 +83,4 @@ describe Gaku::ClassGroup, type: :model do
       end
     end
   end
-
 end

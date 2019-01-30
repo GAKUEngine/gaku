@@ -1,7 +1,6 @@
 require 'spec_helper_models'
 
 describe Gaku::Teacher, type: :model do
-
   describe 'concerns' do
     it_behaves_like 'person'
     it_behaves_like 'addressable'
@@ -11,23 +10,21 @@ describe Gaku::Teacher, type: :model do
   end
 
   describe 'associations' do
-    it { should belong_to :user }
+    it { is_expected.to belong_to :user }
   end
 
   describe '#primary_contact' do
-    it('responds to primary_contact') { should respond_to(:primary_contact) }
+    it('responds to primary_contact') { is_expected.to respond_to(:primary_contact) }
   end
 
   describe '#primary_address' do
-    it('responds to primary_address') { should respond_to(:primary_address) }
+    it('responds to primary_address') { is_expected.to respond_to(:primary_address) }
   end
 
   context 'counter_cache' do
-
     let!(:teacher) { create(:teacher) }
 
     context 'addresses_count' do
-
       let(:address) { build(:address) }
       let(:teacher_with_address) { create(:teacher, :with_address) }
 
@@ -45,7 +42,6 @@ describe Gaku::Teacher, type: :model do
     end
 
     context 'contacts_count' do
-
       let(:contact) { build(:contact) }
       let(:teacher_with_contact) { create(:teacher, :with_contact) }
 
@@ -63,7 +59,6 @@ describe Gaku::Teacher, type: :model do
     end
 
     context 'notes_count' do
-
       let(:note) { build(:note) }
       let(:teacher_with_note) { create(:teacher, :with_note) }
 
@@ -79,7 +74,5 @@ describe Gaku::Teacher, type: :model do
         end.to change { teacher_with_note.reload.notes_count }.by(-1)
       end
     end
-
   end
-
 end

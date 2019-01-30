@@ -1,7 +1,6 @@
 require 'spec_helper_models'
 
 describe Gaku::Course, type: :model do
-
   describe 'concerns' do
     it_behaves_like 'gradable'
     it_behaves_like 'enrollable'
@@ -9,19 +8,18 @@ describe Gaku::Course, type: :model do
   end
 
   describe 'associations' do
+    it { is_expected.to have_many :course_group_enrollments }
+    it { is_expected.to have_many(:course_groups).through(:course_group_enrollments) }
 
-    it { should have_many :course_group_enrollments }
-    it { should have_many(:course_groups).through(:course_group_enrollments) }
-
-    it { should belong_to :syllabus }
-    it { should belong_to :class_group }
-    it { should have_many :exam_schedules }
+    it { is_expected.to belong_to :syllabus }
+    it { is_expected.to belong_to :class_group }
+    it { is_expected.to have_many :exam_schedules }
 
     # it { should accept_nested_attributes_for :enrollments }
   end
 
   describe 'validations' do
-    it { should validate_presence_of :code }
+    it { is_expected.to validate_presence_of :code }
   end
 
   # context 'enroll_class_group' do
@@ -38,11 +36,9 @@ describe Gaku::Course, type: :model do
   # end
 
   context 'counter_cache' do
-
     let!(:course) { create(:course) }
 
     context 'notes_count' do
-
       let(:note) { build(:note) }
       let(:course_with_note) { create(:course, :with_note) }
 
@@ -60,7 +56,6 @@ describe Gaku::Course, type: :model do
     end
 
     context 'enrollments_count' do
-
       let(:student) { build(:student) }
       let(:course_with_enrollment) { create(:course, :with_enrollment) }
 
@@ -76,7 +71,5 @@ describe Gaku::Course, type: :model do
         end.to change { course_with_enrollment.reload.enrollments_count }.by(-1)
       end
     end
-
   end
-
 end

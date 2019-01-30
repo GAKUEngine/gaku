@@ -1,7 +1,6 @@
 require 'spec_helper_models'
 
 describe Gaku::StudentSelection do
-
   let(:student) { create(:student) }
   let(:student2) { create(:student) }
   let!(:user) { create(:user) }
@@ -46,7 +45,6 @@ describe Gaku::StudentSelection do
 
   describe '.collection' do
     it 'add collection to selected students' do
-
       described_class.new(user).collection([student, student2])
       expect(described_class.new(user).all).to eq [student.id.to_s, student2.id.to_s]
       expect(described_class.new(user).students).to eq [student, student2]
@@ -61,5 +59,4 @@ describe Gaku::StudentSelection do
       expect(described_class.new(user).students).to eq []
     end
   end
-
 end

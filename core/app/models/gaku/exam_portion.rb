@@ -28,7 +28,7 @@ module Gaku
     before_update :weight_calculate
     before_save :sanitize_score_selection_options
 
-    enum score_type: %i( score score_selection score_text )
+    enum score_type: %i[score score_selection score_text]
 
     def to_s
       name
@@ -72,9 +72,7 @@ module Gaku
     private
 
     def sanitize_score_selection_options
-      if self.score_selection_options
-        self.score_selection_options = self.score_selection_options.reject(&:blank?)
-      end
+      self.score_selection_options = score_selection_options.reject(&:blank?) if score_selection_options
     end
 
     def proper_position

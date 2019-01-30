@@ -1,5 +1,3 @@
-# -*- encoding: utf-8 -*-
-
 commute_method_types = [
   { name: 'Unknown',  name_ja: '不明' },
   { name: 'Walking',  name_ja: '歩行' },

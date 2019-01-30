@@ -1,25 +1,24 @@
 require 'spec_helper_models'
 
 describe Gaku::Enrollment, type: :model do
-
   describe 'associations' do
-    it { should belong_to :student }
-    it { should belong_to :enrollable }
+    it { is_expected.to belong_to :student }
+    it { is_expected.to belong_to :enrollable }
   end
 
   describe 'validations' do
-    it { should validate_presence_of :student_id }
-    it { should validate_presence_of :enrollable_id }
-    it { should validate_presence_of :enrollable_type }
+    it { is_expected.to validate_presence_of :student_id }
+    it { is_expected.to validate_presence_of :enrollable_id }
+    it { is_expected.to validate_presence_of :enrollable_type }
 
     it do
-      should validate_uniqueness_of(:student_id).scoped_to([:enrollable_type, :enrollable_id])
-                                                # .with_message(/already enrolled/)
+      expect(subject).to validate_uniqueness_of(:student_id).scoped_to(%i[enrollable_type enrollable_id])
+      # .with_message(/already enrolled/)
     end
 
     it('ensures inclusion') do
-      should validate_inclusion_of(:enrollable_type)
-        .in_array(%w(Gaku::Course Gaku::ClassGroup Gaku::ExtracurricularActivity))
+      expect(subject).to validate_inclusion_of(:enrollable_type)
+        .in_array(%w[Gaku::Course Gaku::ClassGroup Gaku::ExtracurricularActivity])
     end
   end
 
@@ -40,5 +39,4 @@ describe Gaku::Enrollment, type: :model do
       expect(enrollment.errors[:base]).to include 'A student cannot belong to two Class Groups with overlapping semesters'
     end
   end
-
 end

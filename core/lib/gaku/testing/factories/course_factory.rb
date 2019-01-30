@@ -1,9 +1,7 @@
 FactoryBot.define do
-
   factory :course, class: Gaku::Course do
-    code 'A1'
+    code { 'A1' }
 
-    factory(:invalid_course) { code nil }
+    factory(:invalid_course) { code { nil } }
   end
-
 end

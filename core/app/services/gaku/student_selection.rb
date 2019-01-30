@@ -1,6 +1,5 @@
 module Gaku
   class StudentSelection
-
     attr_accessor :user
 
     def initialize(user)
@@ -13,17 +12,17 @@ module Gaku
 
     def remove_all
       $redis.del(user_selection)
-      self.students
+      students
     end
 
     def add(student)
       $redis.rpush(user_selection, student.id)
-      self.students
+      students
     end
 
     def remove(student)
       $redis.lrem(user_selection, 0, student.id)
-      self.students
+      students
     end
 
     def collection(students)
@@ -46,12 +45,11 @@ module Gaku
     private
 
     def user_selection
-      %Q(user:#{user.id}:student_selection)
+      %(user:#{user.id}:student_selection)
     end
 
     def not_added_students(students)
       students.reject { |student| all.include?(student.id) }.map(&:id)
     end
-
   end
 end

@@ -1,37 +1,35 @@
 require 'spec_helper_models'
 
 describe Gaku::Campus, type: :model do
-
   describe 'concerns' do
     it_behaves_like 'contactable'
     it_behaves_like 'avatarable'
   end
 
   describe 'relations' do
-    it { should belong_to :school }
-    it { should have_one :address }
+    it { is_expected.to belong_to :school }
+    it { is_expected.to have_one :address }
   end
 
   describe 'validations' do
-    it { should validate_presence_of :name }
-    it { should validate_presence_of :school }
+    it { is_expected.to validate_presence_of :name }
+    it { is_expected.to validate_presence_of :school }
   end
 
   describe '#primary_contact' do
-    it('responds to primary_contact') { should respond_to(:primary_contact) }
+    it('responds to primary_contact') { is_expected.to respond_to(:primary_contact) }
   end
 
   describe '#to_s' do
     let(:campus) { build(:campus) }
+
     specify { campus.to_s.should eq campus.name }
   end
 
   context 'counter_cache' do
-
     let!(:campus) { create(:campus) }
 
     context 'addresses_count' do
-
       let(:address) { build(:address) }
 
       it 'increments addresses_count' do
@@ -49,7 +47,6 @@ describe Gaku::Campus, type: :model do
     end
 
     context 'contacts_count' do
-
       let(:contact) { build(:contact) }
 
       it 'increments contacts_count' do
@@ -65,7 +62,5 @@ describe Gaku::Campus, type: :model do
         end.to change { campus.reload.contacts_count }.by(-1)
       end
     end
-
   end
-
 end

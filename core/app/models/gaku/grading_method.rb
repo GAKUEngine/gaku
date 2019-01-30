@@ -12,7 +12,7 @@ module Gaku
 
     validates :name, presence: true, uniqueness: true
 
-    Types = %w( score percentage ordinal interval )
+    Types = %w[score percentage ordinal interval].freeze
 
     validates :grading_type, presence: true, inclusion: { in: Types }
 

@@ -1,22 +1,21 @@
 require 'spec_helper_models'
 
 describe Gaku::Address, type: :model do
-
   let(:state)   { build(:state) }
   let(:country) { create(:country) }
   let(:student) { create(:student) }
   let(:address) { create(:address, country: country, addressable: student) }
 
   describe 'relations' do
-    it { should belong_to :country }
-    it { should belong_to :state }
-    it { should belong_to :addressable }
+    it { is_expected.to belong_to :country }
+    it { is_expected.to belong_to :state }
+    it { is_expected.to belong_to :addressable }
   end
 
   describe 'validations' do
-    it { should validate_presence_of :address1 }
-    it { should validate_presence_of :city }
-    it { should validate_presence_of :country }
+    it { is_expected.to validate_presence_of :address1 }
+    it { is_expected.to validate_presence_of :city }
+    it { is_expected.to validate_presence_of :country }
   end
 
   describe '.before_save' do
@@ -104,7 +103,8 @@ describe Gaku::Address, type: :model do
   describe '#campus_address?' do
     context "addressable_type is 'Gaku::Campus'" do
       let(:address) { build(:address, addressable_type: 'Gaku::Campus') }
-      specify { expect(address.addressable_type?).to be_truthy }
+
+      specify { expect(address).to be_addressable_type }
     end
   end
 
@@ -112,12 +112,14 @@ describe Gaku::Address, type: :model do
     context 'both name and abbr is present' do
       let(:state) { build(:state, name: 'virginia', abbr: 'va') }
       let(:address) { build(:address, state: state) }
+
       specify { address.state_text.should == 'va' }
     end
 
     context 'only name is present' do
       let(:state) { build(:state, name: 'virginia', abbr: nil) }
       let(:address) { build(:address, state: state) }
+
       specify { address.state_text.should == 'virginia' }
     end
   end

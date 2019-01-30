@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :address, class: Gaku::Address do
     address1 { FFaker::Address.street_address }
     address2 { FFaker::Address.street_address }
@@ -9,14 +8,11 @@ FactoryBot.define do
     country
 
     after(:build) do |address|
-      if address.addressable.respond_to?(:addresses)
-        address.addressable.addresses.reload
-      end
+      address.addressable.addresses.reload if address.addressable.respond_to?(:addresses)
     end
 
-    factory :invalid_address  do
-      address1 nil
+    factory :invalid_address do
+      address1 { nil }
     end
   end
-
 end

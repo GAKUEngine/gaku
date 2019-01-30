@@ -1,12 +1,15 @@
 module Gaku
   class ClassGroup < ActiveRecord::Base
-
-    include Notes, Pagination, Enrollable, Semesterable, StudentReviewable
+    include StudentReviewable
+    include Semesterable
+    include Enrollable
+    include Pagination
+    include Notes
 
     validates :name, presence: true
 
     def self.for_select
-      %w(active upcomming).map do |state|
+      %w[active upcomming].map do |state|
         [state.humanize, send(state).map { |cg| [cg.to_s, cg.id] }]
       end
     end
@@ -22,6 +25,5 @@ module Gaku
     def to_s
       "#{grade} - #{name}"
     end
-
   end
 end

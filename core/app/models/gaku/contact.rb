@@ -57,6 +57,5 @@ module Gaku
     def decrement_count
       contactable.class.decrement_counter(:contacts_count, contactable.id)
     end
-
   end
 end

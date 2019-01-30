@@ -1,6 +1,5 @@
 module Gaku
   class State < ActiveRecord::Base
-
     default_scope { order(:abbr) }
 
     has_many :addresses
@@ -40,6 +39,5 @@ module Gaku
         name
       end
     end
-
   end
 end

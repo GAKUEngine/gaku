@@ -3,12 +3,12 @@ source 'https://rubygems.org'
 # Declare your gem's dependencies in api.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
-eval(File.read(File.dirname(__FILE__) + '/../core/core_dependencies.rb'))
 eval(File.read(File.dirname(__FILE__) + '/../common_gaku_dependencies.rb'))
-
+eval(File.read(File.dirname(__FILE__) + '/../core/core_dependencies.rb'))
 
 gem 'gaku_core', path: '../core'
 gem 'gaku_testing', path: '../testing'
+
 gemspec
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or

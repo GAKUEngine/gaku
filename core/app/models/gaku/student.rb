@@ -1,15 +1,19 @@
 module Gaku
   class Student < ApplicationRecord
-    include Person, Addresses, Contacts, Notes, Pagination
+    include Pagination
+    include Notes
+    include Contacts
+    include Addresses
+    include Person
 
     has_many :enrollments, dependent: :destroy
 
     has_many :course_enrollments,
-      -> { where(enrollable_type: 'Gaku::Course') }, class_name: 'Gaku::Enrollment'
+             -> { where(enrollable_type: 'Gaku::Course') }, class_name: 'Gaku::Enrollment'
     has_many :class_group_enrollments,
-      -> { where(enrollable_type: 'Gaku::ClassGroup') }, class_name: 'Gaku::Enrollment'
+             -> { where(enrollable_type: 'Gaku::ClassGroup') }, class_name: 'Gaku::Enrollment'
     has_many :extracurricular_activity_enrollments,
-      -> { where(enrollable_type: 'Gaku::ExtracurricularActivity') }, class_name: 'Gaku::Enrollment'
+             -> { where(enrollable_type: 'Gaku::ExtracurricularActivity') }, class_name: 'Gaku::Enrollment'
 
     with_options through: :enrollments, source: :enrollable do |assoc|
       assoc.has_many :courses, source_type: 'Gaku::Course'
@@ -51,12 +55,12 @@ module Gaku
     after_save    :set_code
 
     has_attached_file :picture,
-      path: ":rails_root/uploads/:class/:attachment/:id_partition/:style/:filename",
-      styles: { thumb: '256x256>' }, default_url: ':placeholder'
+                      path: ':rails_root/uploads/:class/:attachment/:id_partition/:style/:filename',
+                      styles: { thumb: '256x256>' }, default_url: ':placeholder'
     do_not_validate_attachment_file_type :picture
 
     def self.ransackable_attributes(auth_object = nil)
-      super & %w(enrollment_status_code)
+      super & %w[enrollment_status_code]
     end
 
     def full_name
@@ -79,7 +83,8 @@ module Gaku
       enrollment_status = EnrollmentStatus.where(
         code: 'enrolled',
         active: true,
-        immutable: true).first_or_create!.try(:code)
+        immutable: true
+      ).first_or_create!.try(:code)
       update_column(:enrollment_status_code, enrollment_status)
       save
     end
@@ -120,7 +125,6 @@ module Gaku
       else
         I18n.t('gender.female')
       end
-
     end
 
     private

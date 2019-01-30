@@ -1,8 +1,7 @@
 FactoryBot.define do
-
   factory :contact_creation, class: Gaku::ContactCreation do
-    data 'gaku@example.com'
-    details 'My email'
+    data { 'gaku@example.com' }
+    details { 'My email' }
     contact_type
 
     initialize_with { new(attributes) }
@@ -12,7 +11,5 @@ FactoryBot.define do
         contact_creation.contact.contactable.contacts.reload
       end
     end
-
   end
-
 end

@@ -1,43 +1,41 @@
 FactoryBot.define do
-
   factory :role, class: Gaku::Role do
     sequence(:name) { |n| "Role_#{n}" }
 
     factory :invalid_role do
-      name nil
+      name { nil }
     end
   end
 
   factory :admin_role, parent: :role do
-    name 'Admin'
+    name { 'Admin' }
   end
 
   factory :principal_role, parent: :role do
-    name 'principal'
+    name { 'principal' }
   end
 
   factory :vice_principal_role, parent: :role do
-    name 'vice_principal'
+    name { 'vice_principal' }
   end
 
   factory :student_role, parent: :role do
-    name 'student'
+    name { 'student' }
   end
 
   factory :guardian_role, parent: :role do
-    name 'guardian'
+    name { 'guardian' }
   end
 
   factory :staff_role, parent: :role do
-    name 'staff'
+    name { 'staff' }
   end
 
   factory :instructor_role, parent: :role do
-    name 'instructor'
+    name { 'instructor' }
   end
 
   factory :counselor_role, parent: :role do
-    name 'counselor'
+    name { 'counselor' }
   end
-
 end

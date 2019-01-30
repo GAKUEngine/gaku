@@ -1,13 +1,12 @@
 Gaku::Core::Engine.routes.draw do
-
   # concerns
 
   concern :addresses do
-    resources :addresses, concerns: %i( soft_delete primary ), except: %i( show index soft )
+    resources :addresses, concerns: %i[soft_delete primary], except: %i[show index soft]
   end
 
   concern :contacts do
-    resources :contacts, concerns: %i( soft_delete primary )
+    resources :contacts, concerns: %i[soft_delete primary]
   end
 
   concern :notes do
@@ -30,36 +29,35 @@ Gaku::Core::Engine.routes.draw do
   concern(:student_chooser) { get :student_chooser, on: :member }
 
   # devise
-  devise_for :users, {
-    class_name: 'Gaku::User',
-    module: :devise,
-    controllers: {
-       sessions: 'gaku/devise/sessions',
-       registrations: 'gaku/devise/registrations',
-       passwords: 'gaku/devise/passwords'
-     }
-  }
+  devise_for :users,
+             class_name: 'Gaku::User',
+             module: :devise,
+             controllers: {
+               sessions: 'gaku/devise/sessions',
+               registrations: 'gaku/devise/registrations',
+               passwords: 'gaku/devise/passwords'
+             }
 
   devise_scope :user do
     get :set_up_admin_account, to: 'devise/registrations#set_up_admin_account'
     post :create_admin,        to: 'devise/registrations#create_admin'
   end
 
-  resources :extracurricular_activities, concerns: %i( student_chooser pagination soft_delete show_deleted ) do
+  resources :extracurricular_activities, concerns: %i[student_chooser pagination soft_delete show_deleted] do
     resources :students,
-      controller: 'extracurricular_activities/students',
-      concerns: %i( enroll_student )
+              controller: 'extracurricular_activities/students',
+              concerns: %i[enroll_student]
   end
 
-  resources :class_groups, concerns: %i( notes soft_delete student_chooser ) do
+  resources :class_groups, concerns: %i[notes soft_delete student_chooser] do
     resources :semester_class_groups, controller: 'class_groups/semester_class_groups'
-    resources :class_group_course_enrollments, controller: 'class_groups/courses', only: %i( new create destroy )
-    resources :students, controller: 'class_groups/students', only: %i( new destroy ), concerns: %i( enroll_student )
+    resources :class_group_course_enrollments, controller: 'class_groups/courses', only: %i[new create destroy]
+    resources :students, controller: 'class_groups/students', only: %i[new destroy], concerns: %i[enroll_student]
   end
 
-  resources :courses, concerns: %i( notes student_chooser soft_delete show_deleted ) do
+  resources :courses, concerns: %i[notes student_chooser soft_delete show_deleted] do
     resources :semester_courses, controller: 'courses/semester_courses'
-    resources :enrollments, controller: 'courses/enrollments', concerns: %i( enroll_student ) do
+    resources :enrollments, controller: 'courses/enrollments', concerns: %i[enroll_student] do
       post :enroll_class_group, on: :collection
     end
 
@@ -81,19 +79,19 @@ Gaku::Core::Engine.routes.draw do
     end
   end
 
-  resources :class_group_enrollments,              concerns: %i( enroll_students )
-  resources :course_enrollments,                   concerns: %i( enroll_students )
-  resources :extracurricular_activity_enrollments, concerns: %i( enroll_students )
+  resources :class_group_enrollments,              concerns: %i[enroll_students]
+  resources :course_enrollments,                   concerns: %i[enroll_students]
+  resources :extracurricular_activity_enrollments, concerns: %i[enroll_students]
 
-  resources :syllabuses, concerns: %i( notes soft_delete show_deleted ) do
+  resources :syllabuses, concerns: %i[notes soft_delete show_deleted] do
     resources :assignments,     controller: 'syllabuses/assignments'
     resources :exams,           controller: 'syllabuses/exams'
     resources :exam_syllabuses, controller: 'syllabuses/exam_syllabuses'
   end
 
-  resources :teachers, concerns: %i( addresses contacts notes soft_delete show_deleted pagination )
+  resources :teachers, concerns: %i[addresses contacts notes soft_delete show_deleted pagination]
 
-  resources :students, concerns: %i( addresses contacts notes soft_delete show_deleted pagination ) do
+  resources :students, concerns: %i[addresses contacts notes soft_delete show_deleted pagination] do
     get :load_autocomplete_data, on: :collection
 
     resources :simple_grades,        controller: 'students/simple_grades', except: :show
@@ -101,22 +99,22 @@ Gaku::Core::Engine.routes.draw do
     resources :student_achievements, controller: 'students/student_achievements', except: :show
     resources :student_specialties,  controller: 'students/student_specialties',  except: :show
 
-    resources :guardians, except: %i( index show ),
-      controller: 'students/guardians',
-      concerns: %i( addresses contacts soft_delete )
+    resources :guardians, except: %i[index show],
+                          controller: 'students/guardians',
+                          concerns: %i[addresses contacts soft_delete]
 
     resources :course_enrollments,
-      controller: 'students/course_enrollments',
-      only: %i( new create destroy )
+              controller: 'students/course_enrollments',
+              only: %i[new create destroy]
 
     resources :class_group_enrollments, controller: 'students/class_group_enrollments'
   end
 
-  resources :exams, concerns: %i( notes soft_delete ) do
+  resources :exams, concerns: %i[notes soft_delete] do
     put :create_exam_portion, on: :member
 
     resources :exam_scores
-    resources :exam_portions, controller: 'exams/exam_portions', concerns: %i( sort ) do
+    resources :exam_portions, controller: 'exams/exam_portions', concerns: %i[sort] do
       resources :attachments, controller: 'exams/exam_portions/attachments'
     end
   end
