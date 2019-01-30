@@ -6,7 +6,7 @@ module Gaku
         before_action :set_course, only: %i( show update destroy )
 
         def index
-          @courses = Course.all.page(params[:page ])
+          @courses = Course.all.page(params[:page])
           collection_respond_to @courses, root: :courses
         end
 
@@ -40,8 +40,7 @@ module Gaku
         end
 
         def course_params
-          params.require(:code)
-          params.permit(course_attrs)
+          params.require(:course).permit(course_attrs)
         end
 
         def course_attrs

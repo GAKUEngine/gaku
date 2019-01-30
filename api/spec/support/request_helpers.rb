@@ -7,7 +7,6 @@ module RequestHelpers
   end
 
   def msgpack
-    # binding.pry
     ActiveSupport::MessagePack.decode(response.body).with_indifferent_access
   end
 
