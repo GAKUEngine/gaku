@@ -145,6 +145,20 @@ describe 'Students', type: :request do
       end
     end
 
+    context 'picture' do
+      describe 'success' do
+        before do
+          student
+          msgpack_api_get gaku.picture_api_v1_student_path(student)
+        end
+
+        it 'success response' do
+          ensure_ok
+          expect(response.headers['Content-Disposition']).to eq("attachment; filename=\"#{student.picture_file_name}\"")
+          expect(response.content_type).to eq('application/octet-stream')
+        end
+      end
+    end
   end
 
   describe 'CREATE' do

@@ -9,6 +9,7 @@ FactoryBot.define do
     surname_reading { FFaker::Name.last_name }
     gender { true }
     birth_date { Date.today }
+    picture { FFaker::Image.file }
   end
 
   factory :student_with_one_guardian, parent: :student do
