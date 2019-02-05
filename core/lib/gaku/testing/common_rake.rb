@@ -5,12 +5,12 @@ end
 desc 'Generates a dummy app for testing'
 namespace :common do
   task :start_testing do
-    dir = "cd #{__dir__}/../../../../docker"
+    dir = "cd #{__dir__}/../../../../testing/docker"
     puts `#{dir} && docker-compose up -d`
   end
 
   task :stop_testing do
-    dir = "cd #{__dir__}/../../../../docker"
+    dir = "cd #{__dir__}/../../../../testing/docker"
     puts `#{dir} && docker-compose down -v`
   end
 
