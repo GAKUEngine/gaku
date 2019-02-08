@@ -35,13 +35,13 @@ describe 'Courses::Students', type: :request do
       end
 
       it 'total_count' do
-        expect(json['meta']).to include({total_count: 1})
+        expect(json['meta']).to include({ total_count: 1 })
       end
       it 'count' do
-        expect(json['meta']).to include({count: 1})
+        expect(json['meta']).to include({ count: 1 })
       end
       it 'page' do
-        expect(json['meta']).to include({page: 1})
+        expect(json['meta']).to include({ page: 1 })
       end
     end
 
@@ -63,13 +63,13 @@ describe 'Courses::Students', type: :request do
         expect(msgpack['students'].first).to include(*student_attributes)
       end
       it 'total_count' do
-        expect(msgpack['meta']).to include({total_count: 1})
+        expect(msgpack['meta']).to include({ total_count: 1 })
       end
       it 'count' do
-        expect(msgpack['meta']).to include({count: 1})
+        expect(msgpack['meta']).to include({ count: 1 })
       end
       it 'page' do
-        expect(msgpack['meta']).to include({page: 1})
+        expect(msgpack['meta']).to include({ page: 1 })
       end
     end
   end

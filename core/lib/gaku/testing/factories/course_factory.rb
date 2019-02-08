@@ -10,5 +10,12 @@ FactoryBot.define do
         course.save
       end
     end
+
+    trait :with_enrollement do
+      after(:create) do |course|
+        course.enrollments << create(:course_enrollment)
+        course.save
+      end
+    end
   end
 end
