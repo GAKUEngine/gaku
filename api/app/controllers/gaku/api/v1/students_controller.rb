@@ -7,7 +7,7 @@ module Gaku
         before_action :set_student, except: %i( index create )
 
         def index
-          @students = Student.includes(:primary_contact, :primary_address).all.page(params[:page])
+          @students = Student.includes(:primary_contact, :primary_address).all
           collection_respond_to @students, root: :students
         end
 
@@ -20,14 +20,14 @@ module Gaku
         end
 
         def create
-          @student = Student.new(student_params)
+          @student = Student.new(create_student_params)
           if @student.save!
             member_respond_to @student
           end
         end
 
         def update
-          if @student.update!(student_params)
+          if @student.update!(update_student_params)
             member_respond_to @student
           end
         end
@@ -44,8 +44,17 @@ module Gaku
           @student = Student.find(params[:id])
         end
 
-        def student_params
-          params.require(:student).permit(student_attributes)
+        def create_student_params
+          params.require(required_student_attributes)
+          params.permit(student_attributes)
+        end
+
+       def update_student_params
+          params.permit(student_attributes)
+        end
+
+        def required_student_attributes
+          %i( name surname )
         end
 
         def student_attributes

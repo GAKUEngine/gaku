@@ -7,7 +7,7 @@ module Gaku
         before_action :set_syllabus, only: %i( show update destroy )
 
         def index
-          @syllabuses = Syllabus.accessible_by(current_ability).page(params[:page])
+          @syllabuses = Syllabus.accessible_by(current_ability).page(params[:page ])
           collection_respond_to @syllabuses, root: :syllabuses
         end
 
@@ -45,7 +45,8 @@ module Gaku
         end
 
         def syllabus_params
-          params.require(:syllabus).permit(syllabus_attrs)
+          params.require(syllabus_attrs)
+          params.permit(syllabus_attrs)
         end
 
         def syllabus_attrs

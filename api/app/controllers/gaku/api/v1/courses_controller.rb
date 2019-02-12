@@ -41,7 +41,8 @@ module Gaku
         end
 
         def course_params
-          params.require(:course).permit(course_attrs)
+          params.require(:code)
+          params.permit(course_attrs)
         end
 
         def course_attrs
