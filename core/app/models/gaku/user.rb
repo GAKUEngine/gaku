@@ -16,7 +16,7 @@ module Gaku
 
     roles_table_name = Role.table_name
 
-    scope :admin, -> { includes(:roles).where("#{roles_table_name}.name" => 'Admin') }
+    scope :admin, -> { includes(:roles).where("#{roles_table_name}.name" => 'admin') }
 
     scope :enabled, -> do
       where("disabled_until <= ?", Date.today)

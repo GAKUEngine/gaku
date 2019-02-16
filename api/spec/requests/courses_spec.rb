@@ -4,7 +4,7 @@ describe 'Courses', type: :request do
 
   let(:course_attributes) {
     %i( id name code notes_count faculty_id
-      syllabus_id class_group_id created_at updated_at enrollments_count
+      syllabus_id class_group_id enrollments_count
     )
   }
 
@@ -147,7 +147,7 @@ describe 'Courses', type: :request do
       describe 'success' do
         before do
           expect do
-            course_params = { course: { code: 'Mickey Course'} }
+            course_params = { code: 'Mickey Course'}
             api_post gaku.api_v1_courses_path, params: course_params
           end.to change(Gaku::Course, :count).by(1)
         end
@@ -167,15 +167,15 @@ describe 'Courses', type: :request do
       describe 'error' do
 
         before do
-          api_post gaku.api_v1_courses_path, params: { course: { code: '' } }
+          api_post gaku.api_v1_courses_path, params: { code: '' }
         end
 
         it 'render error' do
-          expect(json).to eq({'code' => ["can't be blank"]})
+          expect(json).to eq({'error' => "param is missing or the value is empty: code"})
         end
 
         it 'response code' do
-          ensure_unprocessable_entity
+          ensure_internal_server_error
         end
       end
     end
@@ -183,7 +183,7 @@ describe 'Courses', type: :request do
       describe 'success' do
         before do
           expect do
-            course_params = { course: { code: 'Mickey Course'} }
+            course_params = { code: 'Mickey Course' }
             msgpack_api_post gaku.api_v1_courses_path, msgpack: course_params
           end.to change(Gaku::Course, :count).by(1)
         end
@@ -203,20 +203,18 @@ describe 'Courses', type: :request do
       describe 'error' do
 
         before do
-          msgpack_api_post gaku.api_v1_courses_path, msgpack: {course: {code: ''}}
+          msgpack_api_post gaku.api_v1_courses_path, msgpack: {code: ''}
         end
 
         it 'render error' do
-          expect(msgpack).to eq({'code' => ["can't be blank"]})
+          expect(msgpack).to eq({'error' => "param is missing or the value is empty: code"})
         end
 
         it 'response code' do
-          ensure_unprocessable_entity
+          ensure_internal_server_error
         end
       end
     end
-
-
   end
 
   describe 'UPDATE' do
@@ -224,7 +222,7 @@ describe 'Courses', type: :request do
       describe 'success' do
         before do
           course = create(:course)
-          course_params = { course: { code: 'Mini Course' } }
+          course_params = {code: 'Mini Course'}
           api_patch gaku.api_v1_course_path(course), params: course_params
         end
 
@@ -244,16 +242,16 @@ describe 'Courses', type: :request do
 
         before do
           course = create(:course)
-          course_params = { course: { code: ''} }
+          course_params = { code: ''}
           api_patch gaku.api_v1_course_path(course), params: course_params
         end
 
         it 'render error' do
-          expect(json).to eq({'code' => ["can't be blank"]})
+          expect(json).to eq({'error' => "param is missing or the value is empty: code"})
         end
 
         it 'response code' do
-          ensure_unprocessable_entity
+          ensure_internal_server_error
         end
       end
     end
@@ -262,7 +260,7 @@ describe 'Courses', type: :request do
       describe 'success' do
         before do
           expect do
-            course_params = { course: { code: 'Mini Course' } }
+            course_params = {code: 'Mini Course' }
             msgpack_api_patch gaku.api_v1_course_path(course), msgpack: course_params
           end.to change(Gaku::Course, :count).by(1)
         end
@@ -282,15 +280,15 @@ describe 'Courses', type: :request do
       describe 'error' do
 
         before do
-          msgpack_api_patch gaku.api_v1_course_path(course), msgpack: {course: {code: ''}}
+          msgpack_api_patch gaku.api_v1_course_path(course), msgpack: {code: ''}
         end
 
         it 'render error' do
-          expect(msgpack).to eq({'code' => ["can't be blank"]})
+          expect(msgpack).to eq({'error' => "param is missing or the value is empty: code"})
         end
 
         it 'response code' do
-          ensure_unprocessable_entity
+          ensure_internal_server_error
         end
       end
     end

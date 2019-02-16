@@ -16,7 +16,7 @@ class Gaku::Api::CreateSyllabusService
       end
       return @syllabus
     else
-      errors.add(:base, 'Syllabus creation failed')
+      errors.add(:base, @syllabus.errors.full_messages)
     end
     nil
   end

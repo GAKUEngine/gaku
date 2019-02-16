@@ -166,7 +166,7 @@ describe 'Students', type: :request do
       describe 'success' do
         before do
           expect do
-            student_params = { student: { name: 'Mickey', surname: 'Mouse'} }
+            student_params = {name: 'Mickey', surname: 'Mouse', birth_date: Date.today}
             api_post gaku.api_v1_students_path, params: student_params
           end.to change(Gaku::Student, :count).by(1)
         end
@@ -186,11 +186,12 @@ describe 'Students', type: :request do
       describe 'error' do
 
         before do
-          api_post gaku.api_v1_students_path, params: {student: {name: 'Mickey'}}
+          api_post gaku.api_v1_students_path, params: {name: 'Mickey'}
         end
 
         it 'render error' do
-          expect(json).to eq({'surname' => ["can't be blank"]})
+          expect(json['error']).to include("Surname can't be blank")
+          expect(json['error']).to include("Birth date can't be blank")
         end
 
         it 'response code' do
@@ -202,7 +203,7 @@ describe 'Students', type: :request do
       describe 'success' do
         before do
           expect do
-            student_params = { student: { name: 'Mickey', surname: 'Mouse'} }
+            student_params = {name: 'Mickey', surname: 'Mouse', birth_date: Date.today}
             msgpack_api_post gaku.api_v1_students_path, msgpack: student_params
           end.to change(Gaku::Student, :count).by(1)
         end
@@ -222,11 +223,12 @@ describe 'Students', type: :request do
       describe 'error' do
 
         before do
-          msgpack_api_post gaku.api_v1_students_path, msgpack: {student: {name: 'Mickey'}}
+          msgpack_api_post gaku.api_v1_students_path, msgpack: {name: 'Mickey'}
         end
 
         it 'render error' do
-          expect(msgpack).to eq({'surname' => ["can't be blank"]})
+          expect(msgpack['error']).to include("Surname can't be blank")
+          expect(msgpack['error']).to include("Birth date can't be blank")
         end
 
         it 'response code' do
@@ -243,7 +245,7 @@ describe 'Students', type: :request do
       describe 'success' do
         before do
           student = create(:student)
-          student_params = { student: { name: 'Mini', surname: 'Mouse'} }
+          student_params = {name: 'Mini', surname: 'Mouse'}
           api_patch gaku.api_v1_student_path(student), params: student_params
         end
 
@@ -263,12 +265,13 @@ describe 'Students', type: :request do
 
         before do
           student = create(:student)
-          student_params = { student: { name: ''} }
+          student_params = {name: ''}
           api_patch gaku.api_v1_student_path(student), params: student_params
         end
 
         it 'render error' do
-          expect(json).to eq({'name' => ["can't be blank"]})
+          expect(json['error']).to include("Name can't be blank")
+          # expect(json).to eq({'name' => ["can't be blank"]})
         end
 
         it 'response code' do
@@ -281,7 +284,7 @@ describe 'Students', type: :request do
       describe 'success' do
         before do
           expect do
-            student_params = { student: { name: 'Mini', surname: 'Mouse'} }
+            student_params = {name: 'Mini', surname: 'Mouse'}
             msgpack_api_patch gaku.api_v1_student_path(student), msgpack: student_params
           end.to change(Gaku::Student, :count).by(1)
         end
@@ -301,11 +304,11 @@ describe 'Students', type: :request do
       describe 'error' do
 
         before do
-          msgpack_api_patch gaku.api_v1_student_path(student), msgpack: {student: {name: ''}}
+          msgpack_api_patch gaku.api_v1_student_path(student), msgpack: {name: ''}
         end
 
         it 'render error' do
-          expect(msgpack).to eq({'name' => ["can't be blank"]})
+          expect(msgpack['error']).to include("Name can't be blank")
         end
 
         it 'response code' do

@@ -59,10 +59,10 @@ module Gaku
                       styles: { thumb: '256x256>' }, default_url: ':placeholder'
     do_not_validate_attachment_file_type :picture
 
-    validates :name, :surname, presence: true
+    validates :name, :surname, :birth_date, presence: true
 
     def self.ransackable_attributes(auth_object = nil)
-      super & %w[enrollment_status_code]
+      super & %w(enrollment_status_code name surname birth_date)
     end
 
     def full_name

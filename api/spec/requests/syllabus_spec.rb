@@ -148,7 +148,7 @@ describe 'Syllabus', type: :request do
       describe 'success' do
         before do
           expect do
-            syllabus_params = { syllabus: { name: 'Mickey', code: 'Mouse' } }
+            syllabus_params = { name: 'Mickey', code: 'Mouse' }
             api_post gaku.api_v1_syllabuses_path, params: syllabus_params
           end.to change(Gaku::Syllabus, :count).by(1)
         end
@@ -168,11 +168,11 @@ describe 'Syllabus', type: :request do
 
       describe 'error' do
         before do
-          api_post gaku.api_v1_syllabuses_path, params: { syllabus: { name: 'Mickey' } }
+          api_post gaku.api_v1_syllabuses_path, params: { name: 'Mickey' }
         end
 
         it 'render error' do
-          expect(json).to eq({ 'code' => ["can't be blank"] })
+          expect(json['error']).to include("Code can't be blank")
         end
 
         it 'response code' do
@@ -185,7 +185,7 @@ describe 'Syllabus', type: :request do
       describe 'success' do
         before do
           expect do
-            syllabus_params = { syllabus: { name: 'Mickey', code: 'Mouse' } }
+            syllabus_params = { name: 'Mickey', code: 'Mouse' }
             msgpack_api_post gaku.api_v1_syllabuses_path, msgpack: syllabus_params
           end.to change(Gaku::Syllabus, :count).by(1)
         end
@@ -205,11 +205,11 @@ describe 'Syllabus', type: :request do
 
       describe 'error' do
         before do
-          msgpack_api_post gaku.api_v1_syllabuses_path, msgpack: { syllabus: { name: 'Mickey' } }
+          msgpack_api_post gaku.api_v1_syllabuses_path, msgpack: { name: 'Mickey' }
         end
 
         it 'render error' do
-          expect(msgpack).to eq({ 'code' => ["can't be blank"] })
+          expect(msgpack['error']).to include("Code can't be blank")
         end
 
         it 'response code' do
@@ -224,7 +224,7 @@ describe 'Syllabus', type: :request do
       describe 'success' do
         before do
           syllabus = create(:syllabus)
-          syllabus_params = { syllabus: { name: 'Mini', code: 'Mouse' } }
+          syllabus_params = { name: 'Mini', code: 'Mouse' }
           api_patch gaku.api_v1_syllabus_path(syllabus), params: syllabus_params
         end
 
@@ -244,12 +244,12 @@ describe 'Syllabus', type: :request do
       describe 'error' do
         before do
           syllabus = create(:syllabus)
-          syllabus_params = { syllabus: { name: '' } }
+          syllabus_params = {name: ''}
           api_patch gaku.api_v1_syllabus_path(syllabus), params: syllabus_params
         end
 
         it 'render error' do
-          expect(json).to eq({ 'name' => ["can't be blank"] })
+          expect(json['error']).to include("Name can't be blank")
         end
 
         it 'response code' do
@@ -262,7 +262,7 @@ describe 'Syllabus', type: :request do
       describe 'success' do
         before do
           expect do
-            syllabus_params = { syllabus: { name: 'Mini', code: 'Mouse' } }
+            syllabus_params = { name: 'Mini', code: 'Mouse' }
             msgpack_api_patch gaku.api_v1_syllabus_path(syllabus), msgpack: syllabus_params
           end.to change(Gaku::Syllabus, :count).by(1)
         end
@@ -282,11 +282,11 @@ describe 'Syllabus', type: :request do
 
       describe 'error' do
         before do
-          msgpack_api_patch gaku.api_v1_syllabus_path(syllabus), msgpack: { syllabus: { name: '' } }
+          msgpack_api_patch gaku.api_v1_syllabus_path(syllabus), msgpack:  { name: '' }
         end
 
         it 'render error' do
-          expect(msgpack).to eq({ 'name' => ["can't be blank"] })
+          expect(msgpack['error']).to include("Name can't be blank")
         end
 
         it 'response code' do

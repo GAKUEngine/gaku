@@ -3,8 +3,7 @@ module Gaku
     module V1
       class StudentsController < BaseController
 
-        skip_before_action :authenticate_request
-        before_action :set_student, except: %i( index create )
+        before_action :set_student, except: %i( index create search)
 
         def index
           @students = Student.includes(:primary_contact, :primary_address).all
@@ -20,15 +19,19 @@ module Gaku
         end
 
         def create
-          @student = Student.new(create_student_params)
-          if @student.save!
-            member_respond_to @student
+          create_service = StudentCreateService.call(student_params)
+          if create_service.success?
+            member_respond_to create_service.result
+          else
+            render_service_errors(create_service.errors[:base])
           end
         end
 
         def update
-          if @student.update!(update_student_params)
+          if @student.update(student_params)
             member_respond_to @student
+          else
+            render_service_errors(@student.errors.full_messages)
           end
         end
 
@@ -38,23 +41,21 @@ module Gaku
           end
         end
 
+        def search
+          @q = Student.includes(:primary_contact, :primary_address).ransack(search_params)
+          @students = @q.result
+
+          collection_respond_to @students, root: :students
+        end
+
         private
 
         def set_student
           @student = Student.find(params[:id])
         end
 
-        def create_student_params
-          params.require(required_student_attributes)
+        def student_params
           params.permit(student_attributes)
-        end
-
-       def update_student_params
-          params.permit(student_attributes)
-        end
-
-        def required_student_attributes
-          %i( name surname )
         end
 
         def student_attributes
@@ -62,6 +63,14 @@ module Gaku
             name surname name_reading surname_reading middle_name middle_name_reading
             birth_date gender enrollment_status_code picture
           )
+        end
+
+        def search_params
+          params.require(:q).permit(search_attrs)
+        end
+
+        def search_attrs
+          %i[name_cont name_eq surname_cont surname_eq birth_date_eq]
         end
 
       end

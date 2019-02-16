@@ -7,12 +7,12 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
   before_action :set_default_format
   before_action :authenticate_request
 
-  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
-  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-
   rescue_from StandardError do |exception|
     render respond_format => { error: exception.message }, status: 500
   end
+
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
   private
 
@@ -33,7 +33,7 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
   end
 
   def meta_for(collection)
-    { count: collection.size, total_count: collection.total_count, page: collection.current_page }
+    { count: collection.size, total_count: collection.size, page: 1 }
   end
 
   def authenticate_request
@@ -53,6 +53,10 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
 
   def render_not_found_response(exception)
     render(respond_format => { error: 'record not found' }, status: :not_found)
+  end
+
+  def render_service_errors(errors)
+    render(respond_format => { error: errors.flatten}, status: :unprocessable_entity)
   end
 
 end

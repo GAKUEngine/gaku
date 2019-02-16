@@ -18,17 +18,19 @@ module Gaku
         end
 
         def create
-          @syllabus = CreateSyllabusService.call(current_user, syllabus_params)
-          if @syllabus.success?
-            member_respond_to @syllabus.result
+          @syllabus_service = CreateSyllabusService.call(current_user, syllabus_params)
+          if @syllabus_service.success?
+            member_respond_to @syllabus_service.result
           else
-            fail @syllabus.errors[:base]
+            render_service_errors(@syllabus_service.errors[:base])
           end
         end
 
         def update
-          if @syllabus.update!(syllabus_params)
+          if @syllabus.update(syllabus_params)
             member_respond_to @syllabus
+          else
+            render_service_errors(@syllabus.errors.full_messages)
           end
         end
 
@@ -45,7 +47,6 @@ module Gaku
         end
 
         def syllabus_params
-          params.require(syllabus_attrs)
           params.permit(syllabus_attrs)
         end
 

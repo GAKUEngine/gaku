@@ -60,6 +60,13 @@ describe Gaku::Student, type: :model do
     it { is_expected.to accept_nested_attributes_for(:guardians).allow_destroy(true) }
   end
 
+  # describe 'validations' do
+  #   it { is_expected.to validate_presence_of(:name) }
+  #   it { is_expected.to validate_presence_of(:surname) }
+  #   it { is_expected.to validate_presence_of(:birth_date) }
+  #
+  # end
+  #
   describe '#primary_contact' do
     it('responds to primary_contact') { is_expected.to respond_to(:primary_contact) }
   end
