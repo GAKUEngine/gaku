@@ -8,7 +8,7 @@ module Gaku
     has_many :programs
     has_many :simple_grade_types
 
-    validates :name, presence: true, uniqueness: true
+    validates :name, presence: true, uniqueness: { case_sensitive: true }
 
     has_one :master_campus,
             -> { where master: true },

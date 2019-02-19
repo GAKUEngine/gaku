@@ -1,5 +1,7 @@
 class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
   include ActionController::MimeResponds
+  include CanCan::ControllerAdditions
+
   attr_reader :current_user
 
   before_action :set_default_format
@@ -14,6 +16,10 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
 
   private
 
+  def current_ability
+    Gaku::Ability.new(current_user)
+  end
+
   def respond_format
     request.format.to_sym
   end
@@ -27,7 +33,7 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
   end
 
   def meta_for(collection)
-    { count: collection.size, total_count: collection.total_count, page: collection.current_page }
+    { count: collection.size, total_count: collection.size, page: 1 }
   end
 
   def authenticate_request
@@ -47,6 +53,10 @@ class Gaku::Api::V1::BaseController < Gaku::Api::ApplicationController
 
   def render_not_found_response(exception)
     render(respond_format => { error: 'record not found' }, status: :not_found)
+  end
+
+  def render_service_errors(errors)
+    render(respond_format => { error: errors.flatten}, status: :unprocessable_entity)
   end
 
 end

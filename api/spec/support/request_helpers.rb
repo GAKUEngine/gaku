@@ -22,6 +22,10 @@ module RequestHelpers
     expect(response.status).to eq 404
   end
 
+  def ensure_internal_server_error
+    expect(response.status).to eq 500
+  end
+
 
   %i(get post patch delete).each do |m|
     define_method("api_#{m}") do |path, **args|
@@ -55,7 +59,9 @@ module RequestHelpers
 
   def auth_token
     #JWT: Authorize user
+    role = create(:role, name: 'admin')
     user = create(:user)
+    user.roles << role
     authenticate = Gaku::Api::AuthenticateUser.new(username: user.username, password: user.password).call
     authenticate.result[:auth_token]
   end

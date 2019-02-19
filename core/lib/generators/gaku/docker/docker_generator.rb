@@ -36,6 +36,12 @@ module Gaku
       rake 'gaku:install:migrations'
     end
 
+    def allow_all_request_origins
+      application(nil, env: "development") do
+        "config.action_cable.disable_request_forgery_protection = true"
+      end
+    end
+
     def setup_assets
       @lib_name = 'gaku'
       %w( javascripts stylesheets images ).each do |path|

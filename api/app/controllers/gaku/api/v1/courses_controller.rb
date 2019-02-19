@@ -2,6 +2,7 @@ module Gaku
   module Api
     module V1
       class CoursesController < BaseController
+        load_and_authorize_resource class: 'Gaku::Course'
 
         before_action :set_course, only: %i( show update destroy )
 
@@ -40,7 +41,8 @@ module Gaku
         end
 
         def course_params
-          params.require(:course).permit(course_attrs)
+          params.require(:code)
+          params.permit(course_attrs)
         end
 
         def course_attrs

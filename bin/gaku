@@ -77,6 +77,12 @@ class GakuCLI < Thor
     def terminal
       ::Gaku::Container.Terminal
     end
+    #
+    # TODO: add description
+    desc 'terminal', 'testing'
+    def testing
+      ::Gaku::Container.Testing
+    end
 
     # TODO: add description
     desc 'detach', 'test'

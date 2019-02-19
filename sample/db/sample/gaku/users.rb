@@ -40,15 +40,15 @@ users.each do |user|
 end
 
 admin_user = Gaku::User.find_by_username('admin')
-admin_role = Gaku::Role.find_by_name('Admin')
+admin_role = Gaku::Role.find_by_name('admin')
 admin_user.roles << admin_role
 
 student_user = Gaku::User.find_by_username('student')
-student_role = Gaku::Role.find_by_name('Student')
+student_role = Gaku::Role.find_by_name('student')
 student_user.roles << student_role
 
 guardian_user = Gaku::User.find_by_username('guardian')
-guardian_role = Gaku::Role.find_by_name('Guardian')
+guardian_role = Gaku::Role.find_by_name('guardian')
 guardian_user.roles << guardian_role
 
 say "Creating #{@count[:users]} users...".yellow

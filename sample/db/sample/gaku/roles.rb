@@ -3,4 +3,4 @@
 roles = %w( Admin ProgramManager Instructor Counselor Staff Principal VicePrincipal Student Guardian )
 
 say "Creating #{roles.size} roles ...".yellow
-roles.each { |role| Gaku::Role.where(name: role).first_or_create! }
+roles.each { |role| Gaku::Role.where(name: role.downcase).first_or_create! }
