@@ -22,6 +22,10 @@ Gaku::Core::Engine.routes.draw do
         get :search, on: :collection
       end
 
+      resources :guardians, model_name: 'Gaku::Guardian' do
+        resources :contacts
+      end
+
       resources :exams do
         resources :exam_portions, controller: 'exams/exam_portions' do
           resources :exam_portion_scores, controller: 'exams/exam_portions/exam_portion_scores'

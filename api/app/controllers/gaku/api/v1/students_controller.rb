@@ -61,7 +61,7 @@ module Gaku
         def student_attributes
           %i(
             name surname name_reading surname_reading middle_name middle_name_reading
-            birth_date gender enrollment_status_code picture
+            birth_date gender enrollment_status_code picture foreign_id_code
           )
         end
 
