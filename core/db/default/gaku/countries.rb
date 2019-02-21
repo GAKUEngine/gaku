@@ -1,4 +1,5 @@
 require 'carmen'
+Carmen.i18n_backend.locale = 'ja'
 
 Carmen::Country.all.each do |country|
   next if Gaku::Country.exists?(iso: country.alpha_2_code)
@@ -6,7 +7,7 @@ Carmen::Country.all.each do |country|
   Gaku::Country.create!(name: country.name,
                         iso3: country.alpha_3_code,
                         iso: country.alpha_2_code,
-                        iso_name: country.name.upcase,
+                        iso_name: country.official_name || country.name.upcase,
                         numcode: country.numeric_code,
                         states_required: country.subregions?)
 end

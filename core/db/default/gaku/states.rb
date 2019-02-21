@@ -1,3 +1,5 @@
+Carmen.i18n_backend.locale = 'ja'
+
 Gaku::Country.where(states_required: true).each do |country|
   carmen_country = Carmen::Country.named(country.name)
 
