@@ -51,7 +51,7 @@ describe Gaku::ContactCreation do
           end
 
           it 'makes other contacts non-primary' do
-            service = described_class.new(contact_attributes)
+            service = described_class.new(contact_attributes.merge({data: 'test@example.com'}))
             expect do
               expect(service.save).to be_truthy
             end.to change { Gaku::Contact.count }.by(1)
