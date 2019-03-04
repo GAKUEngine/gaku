@@ -27,7 +27,28 @@ class Gaku::Api::AddressCreateService
   end
 
   def state
-    @state ||= Gaku::State.find_by!(name: address_params[:state])
+    @state ||= find_state
+  end
+
+  def find_state
+    result = nil
+    Carmen.i18n_backend.available_locales.each do |locale|
+      Carmen.i18n_backend.locale = locale
+      Carmen::Country.all.each do |country|
+        region_result = country.subregions.find do |region|
+          region.name == address_params[:state]
+        end
+        result = region_result if region_result
+        break if result
+      end
+      break if result
+    end
+    Carmen.i18n_backend.locale = 'en'
+
+    return if result.blank?
+
+    country = Gaku::Country.find_by(iso: result.parent.alpha_2_code)
+    temp_state = country.states.find_by(abbr: result.code)
   end
 
   def required_attributes
