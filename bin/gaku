@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'thor'
 require_relative '../lib/gaku/container'
+require_relative '../lib/gaku/command/installer'
 
 class GakuCLI < Thor
   desc 'version', 'Prints the version of the installed gaku gem (from which this command is being run).'
