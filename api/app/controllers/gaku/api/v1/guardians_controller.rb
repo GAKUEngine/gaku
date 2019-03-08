@@ -26,7 +26,7 @@ module Gaku
         private
 
         def set_guardian
-          @student = Student.find(params[:id])
+          @guardian = Guardian.find(params[:id])
         end
 
         def guardian_params
