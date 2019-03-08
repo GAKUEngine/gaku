@@ -1,6 +1,6 @@
 require 'spec_helper_requests'
 
-describe 'Addresses', type: :request do
+describe 'Student addresses', type: :request do
 
   let(:address_attributes) {
     %w[id address1 address2 city zipcode title country_id state_id]
@@ -23,7 +23,7 @@ describe 'Addresses', type: :request do
           ensure_ok
         end
 
-        it 'correct course attributes' do
+        it 'correct student attributes' do
           expect(json).to include(address1: 'Syedinenie')
         end
 
@@ -61,7 +61,7 @@ describe 'Addresses', type: :request do
           ensure_ok
         end
 
-        it 'correct course attributes' do
+        it 'correct student attributes' do
           expect(msgpack).to include(address1: 'Syedinenie')
         end
 
