@@ -4,6 +4,7 @@ module Gaku
     belongs_to :contactable, polymorphic: true, counter_cache: true, required: false
 
     validates :data, :contact_type, presence: true
+    validates :data, uniqueness: { scope: [:contactable, :contact_type_id] }
 
     delegate :name, to: :contact_type, allow_nil: true
 

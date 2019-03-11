@@ -16,10 +16,15 @@ Gaku::Core::Engine.routes.draw do
         resources :extracurricular_activities, controller: 'students/extracurricular_activities'
         resources :exam_sessions, controller: 'students/exam_sessions'
         resources :contacts
-        resources :addresses, controller: 'students/addresses'
+        resources :addresses
 
         get :picture, on: :member
         get :search, on: :collection
+      end
+
+      resources :guardians, model_name: 'Gaku::Guardian' do
+        resources :contacts
+        resources :addresses
       end
 
       resources :exams do
