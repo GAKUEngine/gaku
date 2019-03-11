@@ -48,6 +48,7 @@ class Gaku::Api::AddressCreateService
     return if result.blank?
 
     country = Gaku::Country.find_by(iso: result.parent.alpha_2_code)
+    return nil unless country
     temp_state = country.states.find_by(abbr: result.code)
   end
 
