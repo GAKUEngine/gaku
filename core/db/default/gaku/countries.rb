@@ -1,5 +1,4 @@
 require 'carmen'
-Carmen.i18n_backend.locale = 'ja'
 
 Carmen::Country.all.each do |country|
   next if Gaku::Country.exists?(iso: country.alpha_2_code)
