@@ -4,6 +4,20 @@ require_relative '../lib/gaku/container'
 require_relative '../lib/gaku/command/installer'
 
 class GakuCLI < Thor
+
+  desc 'specs', 'Run all specs'
+  def specs()
+    Dir.chdir("#{__dir__}/../core") do
+        system('bundle exec rake test_app')
+        system('bundle exec rspec spec')
+    end
+
+    Dir.chdir("#{__dir__}/../api") do
+        system('bundle exec rake test_app')
+        system('bundle exec rspec spec')
+    end
+  end
+
   desc 'version', 'Prints the version of the installed gaku gem (from which this command is being run).'
   def version()
     require 'rubygems'
