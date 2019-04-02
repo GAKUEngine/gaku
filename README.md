@@ -63,6 +63,13 @@ Manual Installation
 -------------------
 0. Create a Rails app using PostgreSQL as your database and configure your config/database.yml
 1. Add the following to your Gemfile: ```gem 'gaku'``` and run ```bundle install```
+2. Run the GAKU install generator with ```bundle exec rails g gaku:install```
+
+Updating
+--------
+To update a GAKU Engine installation, cd into your installation directory and:
+1. Update your bundle with ```bundle update```
+2. Update by running the install generator again with ```bundle exec rails g gaku:install```
 
 Developer Information
 =====================
