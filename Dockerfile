@@ -5,9 +5,9 @@ EXPOSE 3000
 
 RUN echo "nameserver 1.1.1.1" >> /etc/resolv.conf
 
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y ruby ruby-dev build-essential imagemagick libmagickcore-dev git libpq-dev postgresql-client nodejs
+RUN apt update
+RUN apt upgrade -y
+RUN apt install -y ruby ruby-dev build-essential imagemagick libmagickcore-dev git libpq-dev postgresql-client nodejs
 
 RUN gem install rails -v 5.2.2 --no-ri --no-rdoc
 RUN gem install bundler --no-ri --no-rdoc
