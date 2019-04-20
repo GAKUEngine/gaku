@@ -73,24 +73,22 @@ class GakuCLI < Thor
       ::Gaku::Container.Sample
     end
 
-    # TODO: add description
-    desc 'terminal', 'test'
+    desc 'terminal', 'Opens up a terminal connection to the running container'
     def terminal
       ::Gaku::Container.Terminal
     end
-    #
-    # TODO: add description
-    desc 'terminal', 'testing'
+
+    desc 'testing', 'Sets up the container as a testing target to run specs'
     def testing
       ::Gaku::Container.Testing
     end
 
-    # TODO: add description
-    desc 'detach', 'test'
+    desc 'detach', 'Detaches from the container session'
     def detach
       ::Gaku::Container.Detach
     end
   end
+
   desc 'container', 'Build and run GAKU containers using Docker.'
   subcommand 'container', GakuCLI::Container
 end
