@@ -126,9 +126,50 @@ Run specs:
 rspec
 ```
 
+Working on Windows
+==================
+Windows isn't a very comfortable platoform to work on due to lack of a consolidated/standard 
+shared environemnt and tools. To work on Windows we recommend the following:
+1. An installation of MSYS2. This can be the installation that comes with the Ruby 
+  installer/dev kit.
+2. An installation of Docker or Docker toolbox.
+3. An installation of PostgreSQL. Depending on how you install PostgreSQL the pg gem 
+  installation may be difficult - know that we can't provide assistance for this.
+4. Docker toolbox and Postgre added to your path in MSYS2. Basically add something like 
+  this to your .bashrc or .zshrc or the rc file for your shell of choice: 
+  ```PATH=$PATH:/c/Program\ Files/Docker\ Toolbox/:/c/PostgreSQL/pg11/bin/```  
+  * This example uses Docker Toolbox and BigSQL Postgre for Windows. If you have a different 
+    Docker and Postgre installation replace the above with the path to where you have 
+    docker(.exe), docker-compose(.exe) installed and where you have pg_config(.exe) and 
+    psql(.exe) installed.
+5. Ruby - either installed and accessable from within MSYS2 from the Ruby for Windows Installer 
+  or installed with ```pacman -S ruby``` within a standalone MSYS2 installation.
+6. You will need the basics for building Rails native extensions. A rough installation command 
+  would be something like: 
+  ```pacman -S libxml2 libxml2-devel zlib zlib-devel libxslt libxslt-devel libffi libffi-devel``` 
+  and set bundler to use native libraries: 
+  ```bundle config build.nokogiri --use-system-libraries```
+7. Clone this repository, and run bundler. If any gems fail to install you may need to 
+  install additional tools or adjust your environment variables. Windows is very difficult 
+  to create a standard installation procedure on, so this may be easier said than done.
+8. Start Docker (EG: run the QuickStart terminal) if it's not started already, then Run 
+  ```./bin/gaku container start```. If you get an error about named pipes you'll probably have 
+  to run the container from the Docker terminal (which should be using your installation of MSYS2).
+9. Once the container has started once, you should be able to start it as many times and use it as 
+  you like. Specifically, it should be usable for development on Windows and for developing 
+  and testing clients or tools that run on Windows or are Windows native.
+
+!NOTE!
+When running specs on Windows, specfy where your GAKU directory is by prefixing commands with 
+GAKU_PATH="/path/to/gaku", replacing the path here with the actual path to the cloned GAKU 
+directory. The gaku container command maintains an information file about the IP and port 
+the docker container is running on in tmp/container_info, and apps should read this file 
+to set up their connections accordingly.
+
 Development
------------
-### Status
+===========
+Status
+------
 Development has been resumed, but not full time. We are currently actively seeking funding, 
 and current development efforts are targeted at providing an MVP [Minimum Viable Product] 
 to seek full funding with buiness partners looking to utilize GAKU Engine to provide their 
@@ -145,12 +186,14 @@ Pull requests are very welcome! Please try to follow these simple rules:
 * Make sure your patches are well tested. All specs must pass.
 * Run [rubocop](http://github.com/bbatsov/rubocop) to ensure no style guide issues.
 
-### Core Team
+Core Team
+=========
 * [Rei Kagetsuki](http://github.com/Kagetsuki)
 * [Georgi Tapalilov](http://github.com/tapalilov)
 * [Yukiharu Nakaya](http://github.com/snowsunny)
 
-### Contributors
+Contributors
+============
 
 [https://github.com/GAKUEngine/gaku/contributors](http://github.com/GAKUEngine/gaku/contributors)
 
@@ -158,4 +201,4 @@ Code of Coduct
 --------------
 We welcome anyone. We will not exclde people from this project based on their identity, 
 preferences, political affiliation, opinions, or how they chose to express themselves on any 
-media. If you write good code we're happy to have you as a contributor.
+media. If you writCCe good code we're happy to have you as a contributor.
