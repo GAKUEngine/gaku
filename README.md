@@ -5,7 +5,7 @@
 GAKU Engine [学エンジン]
 ========================
 GAKU Engine, or just "GAKU" for short is the "GenSou Academic Karte Unification Engine". The gaku 
-character 「学」 means "Learning", so saying GAKU Engine is roughly equivilent to saying 
+character 「学」 means "Learning", so saying GAKU Engine is roughly equivalent to saying 
 "Learning Engine".
 
 GAKU is a modular, extendable, Open Source school and student management system built on Rails.
@@ -22,15 +22,15 @@ Separate licenses are available upon consultation. Please contact info@gakuengin
 What does it do?
 ----------------
 GAKU Engine is a full school and student management solution including student, staff, syllabus, 
-course, class, exam management and more. It has a full grading system and offers templatable 
+course, class, exam management and more. It has a full grading system and offers template-able 
 printable reports. Functionality can be enhanced with extensions and can be integrated with 
 external services and clients using the API. 
 
 GAKU Engine is also:
-* Completely Open Source, Free as in Freedom, licensed under the GPL v3 and AGPL 3.
+* Completely Open Source, Free as in Freedom, licensed under the GPL v3 and AGPL v3.
 * It only uses Free Open Source components and does not rely on commercial components.
 * There are no per-seat licenses.
-* It's Rails based, so it's easily modifyable and extendable.
+* It's Rails based, so it's easily modifiable and extendable.
 * It is multi-locale.
 
 Requirements
@@ -126,8 +126,17 @@ Run specs:
 rspec
 ```
 
+Working on OS X
+---------------
+Development on OS X is almost as trivial as Linux if you are willing to install a package 
+manager like HomeBrew, a full [managed] version of Ruby (we recommend using RVM), and 
+Docker Desktop for Mac. Basically, all you need to do is install any development dependencies 
+which mostly ammount to postgresql and anything needed to run Rails (which Ruby Gems can 
+basically do for you if you are using a compatible package manager). Aside from this, working on 
+OS X is essentially the same as working on Linux.
+
 Working on Windows
-==================
+------------------
 Windows isn't a very comfortable platoform to work on due to lack of a consolidated/standard 
 shared environemnt and tools. To work on Windows we recommend the following:
 1. An installation of MSYS2. This can be the installation that comes with the Ruby 
@@ -141,7 +150,11 @@ shared environemnt and tools. To work on Windows we recommend the following:
   * This example uses Docker Toolbox and BigSQL Postgre for Windows. If you have a different 
     Docker and Postgre installation replace the above with the path to where you have 
     docker(.exe), docker-compose(.exe) installed and where you have pg_config(.exe) and 
-    psql(.exe) installed.
+    psql(.exe) installed.  
+	  
+	**NOTE** Even with the path set installation of the pg gem fails on some systems. We aren't 
+	quite sure why this is, but installing manually with the --with-pg-dir option seems to 
+	consistently work. EG: ```gem install pg -- --with-pg-dir=/c/PostgreSQL/pg11/```
 5. Ruby - either installed and accessable from within MSYS2 from the Ruby for Windows Installer 
   or installed with ```pacman -S ruby``` within a standalone MSYS2 installation.
 6. You will need the basics for building Rails native extensions. A rough installation command 
@@ -194,11 +207,10 @@ Core Team
 
 Contributors
 ============
-
 [https://github.com/GAKUEngine/gaku/contributors](http://github.com/GAKUEngine/gaku/contributors)
 
-Code of Coduct
---------------
+Code of Conduct
+===============
 We welcome anyone. We will not exclde people from this project based on their identity, 
 preferences, political affiliation, opinions, or how they chose to express themselves on any 
-media. If you writCCe good code we're happy to have you as a contributor.
+media. If you write good code we're happy to have you as a contributor.
