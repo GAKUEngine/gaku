@@ -5,6 +5,11 @@ module Gaku
         skip_before_action :authenticate_request
         before_action :set_addressable
 
+        def index
+          @addresses = @addressable.addresses
+          collection_respond_to @addresses, root: :addresses
+        end
+
         def create
           create_service = AddressCreateService.call(@addressable, address_params)
           if create_service.success?
@@ -30,7 +35,6 @@ module Gaku
           model_name = params[:model_name]
           @addressable = model_name.constantize.find(params[model_name.foreign_key])
         end
-
 
       end
     end
